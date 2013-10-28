@@ -172,6 +172,10 @@ class Curl {
         $response = new CurlResponse($response);
         
         curl_close($this->request);
+
+	    if ($response->headers['Status-Code'] == 404) {
+		    return null;
+	    }
         
         return $response;
     }
@@ -193,7 +197,12 @@ class Curl {
       $this->userpwd = $username.':'.$password;
       return $this;
     }
-    
+
+	public function setHeader($name,$value) {
+		$this->headers[$name] = $value;
+		return $this;
+	}
+
     /**
      * Formats and adds custom headers to the current request
      *
