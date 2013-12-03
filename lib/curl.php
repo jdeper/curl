@@ -173,7 +173,7 @@ class Curl {
         
         curl_close($this->request);
 
-	    if ($response->headers['Status-Code'] == 404) {
+	    if (isset($response->headers['Status-Code']) && $response->headers['Status-Code'] == 404) {
 		    return null;
 	    }
         
