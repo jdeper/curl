@@ -168,17 +168,19 @@ class Curl {
         if (!$response) {
           throw new CurlException(curl_error($this->request), curl_errno($this->request));
         }
-        
-        $response = new CurlResponse($response);
-        
+
+        $this->response = $response = new CurlResponse($response);
+
         curl_close($this->request);
 
 	    if (isset($response->headers['Status-Code']) && $response->headers['Status-Code'] == 404) {
+
 		    return null;
 	    }
         
         return $response;
     }
+    public $response;
     
     /**
      * Sets the user and password for HTTP auth basic authentication method.
