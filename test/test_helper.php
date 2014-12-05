@@ -9,14 +9,14 @@ function assert_all_equal($value, $other) {
 }
 
 function assert_difference($expression, $lambda) {
-    $expression = 'return '.$expression.';';
+    $expression = 'return ' . $expression . ';';
     $value = eval($expression);
     $lambda();
     assert_not_equal($value, eval($expression));
 }
 
 function assert_no_difference($expression, $lambda) {
-    $expression = 'return '.$expression.';';
+    $expression = 'return ' . $expression . ';';
     $value = eval($expression);
     $lambda();
     assert_equal($value, eval($expression));

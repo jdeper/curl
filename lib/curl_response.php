@@ -6,21 +6,21 @@
  *
  * @package curl
  * @author Sean Huber <shuber@huberry.com>
-**/
+ **/
 class CurlResponse {
 
     /**
      * The body of the response without the headers block
      *
      * @var string
-    **/
+     **/
     public $body = '';
 
     /**
      * An associative array containing the response's headers
      *
      * @var array
-    **/
+     **/
     public $headers = array();
 
     /**
@@ -33,7 +33,7 @@ class CurlResponse {
      * </code>
      *
      * @param string $response
-    **/
+     **/
     function __construct($response) {
         # Headers regex
         $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
@@ -45,7 +45,7 @@ class CurlResponse {
 
         # Inlude all received headers in the $headers_string
         while (count($matches[0])) {
-          $headers_string = array_pop($matches[0]).$headers_string;
+            $headers_string = array_pop($matches[0]) . $headers_string;
         }
 
         # Remove all headers from the response body
@@ -75,7 +75,7 @@ class CurlResponse {
      * </code>
      *
      * @return string
-    **/
+     **/
     function __toString() {
         return $this->body;
     }
