@@ -1,10 +1,13 @@
 <?php
 
+namespace veqryn\Curl;
+
 /**
+ * Class CurlResponse
  * Parses the response from a Curl request into an object containing
  * the response body and an associative array of headers
  *
- * @package curl
+ * @package Curl
  * @author Sean Huber <shuber@huberry.com>
  **/
 class CurlResponse {
@@ -34,7 +37,7 @@ class CurlResponse {
      *
      * @param string $response
      **/
-    function __construct($response) {
+    public function __construct($response) {
         if (empty($response)) {
             return;
         }
@@ -79,7 +82,7 @@ class CurlResponse {
      *
      * @return string
      **/
-    function __toString() {
+    public function __toString() {
         return $this->body;
     }
 

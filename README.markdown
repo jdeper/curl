@@ -7,6 +7,12 @@ A basic CURL wrapper for PHP (see [http://php.net/curl](http://php.net/curl) for
 
 Click the `download` link above or `git clone git@github.com:veqryn/curl.git`
 
+To install into your project, add these lines to your composer.json:
+"require": {
+    // ...
+    "veqryn/curl": "*"
+}
+
 
 ## Usage
 
@@ -14,8 +20,15 @@ Click the `download` link above or `git clone git@github.com:veqryn/curl.git`
 
 Simply require and initialize the `Curl` class like so:
 
-	require_once 'curl.php';
-	$curl = new Curl;
+    require_once('vendor/autoload.php');
+
+    use veqryn\Curl\Curl;
+    use veqryn\Curl\CurlResponse;
+    use veqryn\Curl\CurlException;
+
+    // ...
+
+	$curl = new Curl();
 
 
 ### Performing a Request

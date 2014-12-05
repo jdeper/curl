@@ -1,12 +1,14 @@
 <?php
 
+namespace veqryn\Curl;
+
 /**
  * Class CurlException
  *
- * @package curl
+ * @package Curl
  * @author Sean Huber <shuber@huberry.com>
  */
-class CurlException extends Exception {
+class CurlException extends \Exception {
 
     static public $curl_errors = array(
             CURLE_ABORTED_BY_CALLBACK => 'CURLE_ABORTED_BY_CALLBACK',
@@ -80,7 +82,7 @@ class CurlException extends Exception {
      * @param string $curl_error_message
      * @param int $curl_error_code
      */
-    function __construct($curl_error_message, $curl_error_code) {
+    public function __construct($curl_error_message, $curl_error_code) {
         if (!array_key_exists($curl_error_code, self::$curl_errors)) {
             parent::__construct("Unknown \$curl_error_code: $curl_error_code  with message: " . $curl_error_message, $curl_error_code);
         } else {

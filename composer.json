@@ -37,6 +37,8 @@
         "php": ">=5.3.0"
     },
     "autoload": {
-        "files": ["curl.php"]
+        "psr-0": {
+            "veqryn\\Curl": "lib/"
+        }
     }
 }
