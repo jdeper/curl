@@ -35,6 +35,9 @@ class CurlResponse {
      * @param string $response
      **/
     function __construct($response) {
+        if (empty($response)) {
+            return;
+        }
         # Headers regex
         $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
 

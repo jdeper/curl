@@ -82,12 +82,14 @@ class Curl {
     /**
      * Makes an HTTP DELETE request to the specified $url with an optional array or string of $vars
      *
-     * Returns a CurlResponse object if the request was successful, false otherwise
+     * Returns a CurlResponse object if the request was successful.
+     * If unsuccessful, throws CurlException
      *
      * @param string $url
-     * @param array|string $vars
+     * @param mixed|string|array $vars
      * @return CurlResponse object
-     **/
+     * @throws CurlException
+     */
     function delete($url, $vars = array()) {
         return $this->request('DELETE', $url, $vars);
     }
@@ -95,11 +97,13 @@ class Curl {
     /**
      * Makes an HTTP GET request to the specified $url with an optional array or string of $vars
      *
-     * Returns a CurlResponse object if the request was successful, false otherwise
+     * Returns a CurlResponse object if the request was successful.
+     * If unsuccessful, throws CurlException
      *
      * @param string $url
-     * @param array|string $vars
-     * @return CurlResponse
+     * @param mixed|array|string $vars
+     * @return CurlResponse object
+     * @throws CurlException
      **/
     function get($url, $vars = array()) {
         if (!empty($vars)) {
@@ -112,11 +116,13 @@ class Curl {
     /**
      * Makes an HTTP HEAD request to the specified $url with an optional array or string of $vars
      *
-     * Returns a CurlResponse object if the request was successful, false otherwise
+     * Returns a CurlResponse object if the request was successful.
+     * If unsuccessful, throws CurlException
      *
      * @param string $url
-     * @param array|string $vars
-     * @return CurlResponse
+     * @param mixed|array|string $vars
+     * @return CurlResponse object
+     * @throws CurlException
      **/
     function head($url, $vars = array()) {
         return $this->request('HEAD', $url, $vars);
@@ -125,10 +131,15 @@ class Curl {
     /**
      * Makes an HTTP POST request to the specified $url with an optional array or string of $vars
      *
+     * Returns a CurlResponse object if the request was successful.
+     * If unsuccessful, throws CurlException
+     *
      * @param string $url
-     * @param array|string $vars
-     * @return CurlResponse|boolean
-     **/
+     * @param mixed|array|string $vars
+     * @param mixed|string|null $enctype
+     * @return CurlResponse object
+     * @throws CurlException
+     */
     function post($url, $vars = array(), $enctype = null) {
         return $this->request('POST', $url, $vars, $enctype);
     }
@@ -136,11 +147,13 @@ class Curl {
     /**
      * Makes an HTTP PUT request to the specified $url with an optional array or string of $vars
      *
-     * Returns a CurlResponse object if the request was successful, false otherwise
+     * Returns a CurlResponse object if the request was successful.
+     * If unsuccessful, throws CurlException
      *
      * @param string $url
-     * @param array|string $vars
-     * @return CurlResponse|boolean
+     * @param mixed|array|string $vars
+     * @return CurlResponse
+     * @throws CurlException
      **/
     function put($url, $vars = array()) {
         return $this->request('PUT', $url, $vars);
@@ -149,13 +162,16 @@ class Curl {
     /**
      * Makes an HTTP request of the specified $method to a $url with an optional array or string of $vars
      *
-     * Returns a CurlResponse object if the request was successful, false otherwise
+     * Returns a CurlResponse object if the request was successful.
+     * If unsuccessful, throws CurlException
      *
      * @param string $method
      * @param string $url
-     * @param array|string $vars
-     * @return CurlResponse|boolean
-     **/
+     * @param mixed|array|string $vars
+     * @param mixed|string|null $enctype
+     * @return CurlResponse object
+     * @throws CurlException
+     */
     function request($method, $url, $vars = array(), $enctype = null) {
         $this->request = curl_init();
         if (is_array($vars) && $enctype != 'multipart/form-data') {
@@ -181,9 +197,9 @@ class Curl {
     /**
      * Sets the user and password for HTTP auth basic authentication method.
      *
-     * @param string|null $username
-     * @param string|null $password
-     * @return Curl
+     * @param mixed|string|null $username
+     * @param mixed|string|null $password
+     * @return Curl this for chaining
      */
     function setAuth($username, $password = null) {
         if (null === $username) {
@@ -274,8 +290,8 @@ class Curl {
     }
 
     /**
-     * Returns an associative array of curl options
-     * currently configured.
+     * Returns an associative array of curl options currently configured.
+     * Includes everything in "curl_getinfo"
      *
      * @return array Associative array of curl options
      */

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Class CurlException
+ *
+ * @package curl
+ * @author Sean Huber <shuber@huberry.com>
+ */
 class CurlException extends Exception {
 
     static public $curl_errors = array(
@@ -70,12 +76,16 @@ class CurlException extends Exception {
             CURLE_WRITE_ERROR => 'CURLE_WRITE_ERROR'
     );
 
+    /**
+     * @param string $curl_error_message
+     * @param int $curl_error_code
+     */
     function __construct($curl_error_message, $curl_error_code) {
         if (!array_key_exists($curl_error_code, self::$curl_errors)) {
-            throw new Exception("Unknown \$curl_error_code: $curl_error_code");
+            parent::__construct("Unknown \$curl_error_code: $curl_error_code  with message: " . $curl_error_message, $curl_error_code);
+        } else {
+            parent::__construct(self::$curl_errors[$curl_error_code] . ": $curl_error_message", $curl_error_code);
         }
-
-        parent::__construct(self::$curl_errors[$curl_error_code] . ": $curl_error_message", $curl_error_code);
     }
 
 }
