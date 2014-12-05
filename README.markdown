@@ -5,7 +5,7 @@ A basic CURL wrapper for PHP (see [http://php.net/curl](http://php.net/curl) for
 
 ## Installation
 
-Click the `download` link above or `git clone git://github.com/shuber/curl.git`
+Click the `download` link above or `git clone git@github.com:veqryn/curl.git`
 
 
 ## Usage
