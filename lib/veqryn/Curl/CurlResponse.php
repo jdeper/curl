@@ -75,7 +75,7 @@ class CurlResponse {
      * Returns the response body
      *
      * <code>
-     * $curl = new Curl;
+     * $curl = new Curl();
      * $response = $curl->get('google.com');
      * echo $response;  # => echo $response->body;
      * </code>

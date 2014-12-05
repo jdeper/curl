@@ -8,10 +8,10 @@ A basic CURL wrapper for PHP (see [http://php.net/curl](http://php.net/curl) for
 Click the `download` link above or `git clone git@github.com:veqryn/curl.git`
 
 To install into your project, add these lines to your composer.json:
-"require": {
-    // ...
-    "veqryn/curl": "*"
-}
+    "require": {
+        // ...
+        "veqryn/curl": "*"
+    }
 
 
 ## Usage
