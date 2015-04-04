@@ -49,6 +49,13 @@ class Curl {
     public $referer;
 
     /**
+     * When set to something greater than zero allows for retrys on exceptions
+     *
+     * @var string
+     **/
+    public $exception_retry_attempts = 0;
+
+    /**
      * The user agent to send along with requests
      *
      * @var string
@@ -187,7 +194,19 @@ class Curl {
 
         $response = curl_exec($this->request);
         if (!$response) {
-            throw new CurlException(curl_error($this->request), curl_errno($this->request));
+
+            if ($this->exception_retry_attempts == 0) {
+                throw new CurlException(curl_error($this->request), curl_errno($this->request));
+            } else {
+                // used when retry on exception option is set
+                $retry = 0;
+                while(curl_errno($this->request) == CURLE_OPERATION_TIMEOUTED && $retry < $this->exception_retry_attempts){
+                    $response = curl_exec($this->request);
+                    $retry = $retry + 1;
+                }
+
+            }
+
         }
 
         $response = new CurlResponse($response);
