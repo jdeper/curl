@@ -1,5 +1,5 @@
 {
-    "name": "veqryn/curl",
+    "name": "tegansnyder/curl",
     "license": "MIT",
     "keywords": [
         "curl",
@@ -32,6 +32,11 @@
             "name": "Chris Duncan",
             "email": "VEQRYN@hotmail.com",
             "homepage": "https://github.com/veqryn"
+        },
+        {
+            "name": "Tegan Snyder",
+            "email": "tsnyder@tegdesign.com",
+            "homepage": "https://github.com/tegansnyder"
         }
     ],
     "require": {
