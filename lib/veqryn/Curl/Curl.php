@@ -209,7 +209,7 @@ class Curl {
 
         }
 
-        $response = new CurlResponse($response);
+        $response = new CurlResponse($response, $this->request);
 
         curl_close($this->request);
 
@@ -294,6 +294,7 @@ class Curl {
         }
         if ($this->follow_redirects) {
             curl_setopt($this->request, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($this->request, CURLOPT_MAXREDIRS, 10);
         }
         if ($this->referer) {
             curl_setopt($this->request, CURLOPT_REFERER, $this->referer);

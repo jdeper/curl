@@ -27,17 +27,17 @@ class CurlResponse {
     public $headers = array();
 
     /**
-     * Accepts the result of a curl request as a string
+     * Accepts the result of a curl request as a string and takes curl handle for redirects
      *
      * <code>
-     * $response = new CurlResponse(curl_exec($curl_handle));
+     * $response = new CurlResponse(curl_exec($curl_handle), $curl_handle);
      * echo $response->body;
      * echo $response->headers['Status'];
      * </code>
      *
      * @param string $response
      **/
-    public function __construct($response) {
+    public function __construct($response, $curl_handle) {
         if (empty($response)) {
             return;
         }
@@ -69,6 +69,12 @@ class CurlResponse {
             preg_match('#(.*?)\:\s(.*)#', $header, $matches);
             $this->headers[$matches[1]] = $matches[2];
         }
+
+        // put the redirected to url in the response object
+        if ($this->headers['Status'] == 302) {
+            $this->headers['Redirect_URL'] = curl_getinfo($curl_handle, CURLINFO_EFFECTIVE_URL);
+        }
+
     }
 
     /**
