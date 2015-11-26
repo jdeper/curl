@@ -2,6 +2,10 @@
 
 A basic CURL wrapper for PHP (see [http://php.net/curl](http://php.net/curl) for more information about the libcurl extension for PHP)
 
+The reason for this fork is to add support for getting the original request object. This allows us to check for http headers.
+
+The library is in active use for the craler om [http://foderpriser.dk](http://foderpriser.dk) and [http://fyringsolie-online.dk](http://fyringsolie-online.dk)
+
 
 ## Installation
 
