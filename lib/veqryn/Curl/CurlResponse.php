@@ -37,7 +37,7 @@ class CurlResponse {
      *
      * @param string $response
      **/
-    public function __construct($response, $curl_handle) {
+    public function __construct($response, $curl_handle = null) {
         if (empty($response)) {
             return;
         }
