@@ -15,13 +15,32 @@ class CurlTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(200, $response->headers['Status-Code']);
         $this->assertContains('google', $response->body);
     }
+    public function testGetFails302() {
+		$curl = new Curl();
+        $curl->follow_redirects = false;
+        $response = $curl->get('www.google.com');
+        $this->assertEquals(302, $response->headers['Status-Code']);
 
+    }
+    public function testGetFails404() {
+		$curl = new Curl();
+        $curl->follow_redirects = false;
+        $response = $curl->get('www.google.com/404');
+        $this->assertEquals(404, $response->headers['Status-Code']);
+
+    }
+    public function testPostFails405() {
+		$curl = new Curl();
+        $response = $curl->post('www.google.com','a=b');
+        $this->assertEquals(405, $response->headers['Status-Code']);
+
+    }
     public function testGetFails() {
         $curl = new Curl();
         try {
             $response = $curl->get('diaewkaksdljf-invalid-url-dot-com.com');
         } catch (CurlException $e) {
-            $this->assertEquals("CURLE_COULDNT_RESOLVE_HOST: Couldn't resolve host 'diaewkaksdljf-invalid-url-dot-com.com'", $e->getMessage());
+            $this->assertContains("CURLE_COULDNT_RESOLVE_HOST: ", $e->getMessage());
             return;
         }
         $this->assertTrue(false);
