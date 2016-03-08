@@ -209,18 +209,15 @@ class Curl {
 
         }
 
-        $this->response = $response = new CurlResponse($response);
-
+        $response = new CurlResponse($response,$this->request);
         curl_close($this->request);
 	    if (isset($response->headers['Status-Code']) && $response->headers['Status-Code'] == 404) {
-
-		    return null;
+		    $response->body = null;
 	    }
-        
+
         return $response;
     }
-    public $response;
-    
+
     /**
      * Sets the user and password for HTTP auth basic authentication method.
      *
