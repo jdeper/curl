@@ -27,6 +27,7 @@ class CurlTest extends \PHPUnit_Framework_TestCase {
         $curl->follow_redirects = false;
         $response = $curl->get('www.google.com/404');
         $this->assertEquals(404, $response->headers['Status-Code']);
+        $this->assertEquals(null, $response->body);
 
     }
     public function testPostFails405() {
