@@ -209,13 +209,18 @@ class Curl {
 
         }
 
-        $response = new CurlResponse($response, $this->request);
+        $this->response = $response = new CurlResponse($response);
 
         curl_close($this->request);
+	    if (isset($response->headers['Status-Code']) && $response->headers['Status-Code'] == 404) {
 
+		    return null;
+	    }
+        
         return $response;
     }
-
+    public $response;
+    
     /**
      * Sets the user and password for HTTP auth basic authentication method.
      *
@@ -232,6 +237,11 @@ class Curl {
         $this->userpwd = $username . ':' . $password;
         return $this;
     }
+
+	public function setHeader($name,$value) {
+		$this->headers[$name] = $value;
+		return $this;
+	}
 
     /**
      * Formats and adds custom headers to the current request
