@@ -1,5 +1,5 @@
 {
-    "name": "tegansnyder/curl",
+    "name": "jdeper/curl",
     "license": "MIT",
     "keywords": [
         "curl",
@@ -9,7 +9,7 @@
         "php",
         "wrapper"
     ],
-    "homepage": "https://github.com/veqryn/curl",
+    "homepage": "https://github.com/jdeper/curl",
     "type": "library",
     "description": "PHP Wrapper for Curl",
     "authors": [
